@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/karmek-k/pbin#readme",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.50.0",
+    "@typescript-eslint/parser": "^5.50.0",
+    "eslint": "^8.33.0",
     "typescript": "^4.9.5"
   }
 }
