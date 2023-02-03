@@ -2,9 +2,10 @@
   "name": "pbin",
   "version": "0.0.0",
   "description": "Pastebin running on Node.js",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/karmek-k/pbin/issues"
   },
-  "homepage": "https://github.com/karmek-k/pbin#readme"
+  "homepage": "https://github.com/karmek-k/pbin#readme",
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
 }
