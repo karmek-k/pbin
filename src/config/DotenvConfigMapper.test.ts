@@ -1,6 +1,9 @@
-import { DotenvConfigMapper } from './DotenvConfigMapper';
+import {
+  DotenvConfigMapper,
+  InvalidConfigKeyError,
+} from './DotenvConfigMapper';
 
-describe('dotenv mapper tests', () => {
+describe('DotenvConfigMapper.mapConfig', () => {
   it('should parse hard-coded env variables', () => {
     const mapper = new DotenvConfigMapper({
       PORT: '1234',
@@ -10,10 +13,48 @@ describe('dotenv mapper tests', () => {
 
     expect(config.port).toBe(1234);
   });
+});
 
-  it.todo('should parse one word env variables in standard format');
+describe('DotenvConfigMapper.envCaseToCamelCase', () => {
+  type StringPair = [string, string];
 
-  it.todo('should parse multiple word env variables in standard format');
+  function performTests(tests: StringPair[]): void {
+    tests.forEach(([parameter, value]) =>
+      expect(DotenvConfigMapper.envCaseToCamelCase(parameter)).toBe(value)
+    );
+  }
 
-  it.todo('should throw an error on incorrect env variable format');
+  function performExceptionTests(tests: string[]): void {
+    tests.forEach(parameter =>
+      expect(() => DotenvConfigMapper.envCaseToCamelCase(parameter)).toThrow(
+        InvalidConfigKeyError
+      )
+    );
+  }
+
+  it('should parse one word env variables in standard format', () => {
+    performTests([
+      ['PORT', 'port'],
+      ['FILENAME', 'filename'],
+      ['A123', 'a123'],
+    ]);
+  });
+
+  it('should parse multiple word env variables in standard format', () => {
+    performTests([
+      ['PORT_NAME', 'portName'],
+      ['ABC_123_DEF', 'abc123Def'],
+      ['A_123', 'a123'],
+    ]);
+  });
+
+  it('should throw an error on incorrect env variable format', () => {
+    performExceptionTests([
+      '_FILENAME',
+      'fILe_name',
+      'A____B',
+      '1_ABC',
+      'A_B_',
+    ]);
+  });
 });
