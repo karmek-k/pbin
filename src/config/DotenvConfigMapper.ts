@@ -23,14 +23,24 @@ export class DotenvConfigMapper implements ConfigMapper {
    * @param key environment variable key
    */
   static envCaseToCamelCase(key: string): string {
-    const regex = /^[A-Z](_[A-Z0-9])*$/;
+    // cannot start with a number, only capital letters, numbers and single underscores
+    const regex = /^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$/;
     if (!regex.test(key)) {
       throw InvalidConfigKeyError.fromKey(key);
     }
 
-    const words = key.split('_').map(word => word.toLowerCase());
+    const [firstWord, ...otherWords] = key
+      .split('_')
+      .map(word => word.toLowerCase());
 
-    return '';
+    const otherWordsCapitalized = otherWords.map(word => {
+      const charArray = word.split('');
+      charArray[0] = charArray[0].toUpperCase();
+
+      return charArray.join('');
+    });
+
+    return firstWord.concat(...otherWordsCapitalized);
   }
 }
 
