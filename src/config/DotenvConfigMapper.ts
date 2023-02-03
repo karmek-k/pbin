@@ -1,6 +1,7 @@
 import { DotenvParseOutput } from 'dotenv';
 import { ConfigMapper } from './ConfigMapper';
 import { ConfigModel } from './ConfigModel';
+import { InvalidConfigKeyError } from './InvalidConfigKeyError';
 
 /**
  * Provides app config based on environment variables provided by `dotenv`.
@@ -41,11 +42,5 @@ export class DotenvConfigMapper implements ConfigMapper {
     });
 
     return firstWord.concat(...otherWordsCapitalized);
-  }
-}
-
-export class InvalidConfigKeyError extends Error {
-  static fromKey(key: string): InvalidConfigKeyError {
-    return new this(`Invalid config key: ${key}`);
   }
 }

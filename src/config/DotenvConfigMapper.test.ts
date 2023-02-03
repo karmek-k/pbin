@@ -1,7 +1,5 @@
-import {
-  DotenvConfigMapper,
-  InvalidConfigKeyError,
-} from './DotenvConfigMapper';
+import { DotenvConfigMapper } from './DotenvConfigMapper';
+import { InvalidConfigKeyError } from './InvalidConfigKeyError';
 
 describe('DotenvConfigMapper.mapConfig', () => {
   it('should parse hard-coded env variables', () => {
@@ -50,6 +48,7 @@ describe('DotenvConfigMapper.envCaseToCamelCase', () => {
 
   it('should throw an error on incorrect env variable format', () => {
     performExceptionTests([
+      '',
       '_FILENAME',
       'fILe_name',
       'A____B',
