@@ -1,0 +1,19 @@
+{
+  "name": "pbin",
+  "version": "0.0.0",
+  "description": "Pastebin running on Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karmek-k/pbin.git"
+  },
+  "author": "Bartosz Gleń",
+  "license": "AGPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/karmek-k/pbin/issues"
+  },
+  "homepage": "https://github.com/karmek-k/pbin#readme"
+}
